@@ -5,4 +5,5 @@
   <Project Path="ClockApp.Application.Tests/ClockApp.Application.Tests.csproj" />
   <Project Path="ClockApp.Infrastructure/ClockApp.Infrastructure.csproj" />
   <Project Path="ClockApp.Maui/ClockApp.Maui.csproj" />
+  <Project Path="ClockApp.UITests.Shared/ClockApp.UITests.Shared.csproj" />
 </Solution>

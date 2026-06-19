@@ -11,6 +11,7 @@
             <Grid x:Name="TabBarGrid" ColumnDefinitions="*,*,*">
                 <Label
                     x:Name="ClockTabLabel"
+                    AutomationId="ClockTab"
                     Grid.Column="0"
                     Text="Clock in"
                     Style="{StaticResource TimeOnBottomTabSelected}"

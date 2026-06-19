@@ -35,6 +35,7 @@
                         <Label Text="Email address" Style="{StaticResource TimeOnSubtitle}" FontSize="13" />
                         <Border Style="{StaticResource TimeOnFormField}">
                             <Entry
+                                AutomationId="EmailEntry"
                                 Placeholder="name@company.com"
                                 Text="{Binding Username}"
                                 Keyboard="Email"
@@ -48,6 +49,7 @@
                         <Label Text="Password" Style="{StaticResource TimeOnSubtitle}" FontSize="13" />
                         <Border Style="{StaticResource TimeOnFormField}">
                             <Entry
+                                AutomationId="PasswordEntry"
                                 Placeholder="Password"
                                 Text="{Binding Password}"
                                 IsPassword="True"
@@ -58,10 +60,12 @@
                     </VerticalStackLayout>
 
                     <Label
+                        AutomationId="LoginErrorMessage"
                         Text="{Binding ErrorMessage}"
                         Style="{StaticResource TimeOnError}" />
 
                     <Button
+                        AutomationId="LoginButton"
                         Text="Log in"
                         Command="{Binding LoginCommand}"
                         Style="{StaticResource TimeOnPrimaryButton}"

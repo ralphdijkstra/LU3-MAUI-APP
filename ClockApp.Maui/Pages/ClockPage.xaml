@@ -114,6 +114,7 @@
 
                             <VerticalStackLayout Spacing="12" Margin="0,8,0,0">
                                 <Button
+                                    AutomationId="ClockInButton"
                                     Text="Clock in"
                                     IsVisible="{Binding ShowClockIn}"
                                     IsEnabled="{Binding CanClockInAtLocation}"
