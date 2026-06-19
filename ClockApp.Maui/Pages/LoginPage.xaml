@@ -23,7 +23,7 @@
                 Margin="0,0,0,8" />
 
             <Label
-                Text="Log in met je account"
+                Text="Log in with your account"
                 Style="{StaticResource TimeOnSubtitle}"
                 HorizontalOptions="Center"
                 Margin="0,0,0,32" />
@@ -32,10 +32,10 @@
                 <VerticalStackLayout Spacing="16">
 
                     <VerticalStackLayout Spacing="6">
-                        <Label Text="E-mailadres" Style="{StaticResource TimeOnSubtitle}" FontSize="13" />
+                        <Label Text="Email address" Style="{StaticResource TimeOnSubtitle}" FontSize="13" />
                         <Border Style="{StaticResource TimeOnFormField}">
                             <Entry
-                                Placeholder="naam@bedrijf.nl"
+                                Placeholder="name@company.com"
                                 Text="{Binding Username}"
                                 Keyboard="Email"
                                 ReturnType="Next"
@@ -45,10 +45,10 @@
                     </VerticalStackLayout>
 
                     <VerticalStackLayout Spacing="6">
-                        <Label Text="Wachtwoord" Style="{StaticResource TimeOnSubtitle}" FontSize="13" />
+                        <Label Text="Password" Style="{StaticResource TimeOnSubtitle}" FontSize="13" />
                         <Border Style="{StaticResource TimeOnFormField}">
                             <Entry
-                                Placeholder="Wachtwoord"
+                                Placeholder="Password"
                                 Text="{Binding Password}"
                                 IsPassword="True"
                                 ReturnType="Done"
@@ -62,7 +62,7 @@
                         Style="{StaticResource TimeOnError}" />
 
                     <Button
-                        Text="Inloggen"
+                        Text="Log in"
                         Command="{Binding LoginCommand}"
                         Style="{StaticResource TimeOnPrimaryButton}"
                         HorizontalOptions="Fill"

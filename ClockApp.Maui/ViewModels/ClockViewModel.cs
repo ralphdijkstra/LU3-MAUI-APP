@@ -89,10 +89,10 @@ public partial class ClockViewModel : ViewModelBase
     public bool ShowActionDivider => IsQrMode ? ShowStartBreak || ShowEndBreak : ShowClockOut && (ShowClockIn || ShowStartBreak || ShowEndBreak);
 
     public string QrScannerHint => IsSessionActive
-        ? "Scan de QR-code op locatie of vul de koppelcode in om uit te klokken."
-        : "Scan de QR-code op locatie of vul de 5-letterige koppelcode in.";
+        ? "Scan the QR code on site or enter the pairing code to clock out."
+        : "Scan the QR code on site or enter the 5-letter pairing code.";
 
-    public string QrSubmitButtonText => IsSessionActive ? "Uitklokken" : "Inklokken";
+    public string QrSubmitButtonText => IsSessionActive ? "Clock out" : "Clock in";
 
     public bool CanSubmitCode => !IsBusy && PairingCode.Length == 5;
 
@@ -135,7 +135,7 @@ public partial class ClockViewModel : ViewModelBase
     private string _dayTotalDuration = string.Empty;
 
     [ObservableProperty]
-    private string _dayHoursTitle = "Uren vandaag";
+    private string _dayHoursTitle = "Hours today";
 
     public bool ShowElapsedTimer => IsSessionActive;
 
@@ -304,7 +304,7 @@ public partial class ClockViewModel : ViewModelBase
         }
         catch (Exception ex)
         {
-            ErrorMessage = $"Inklokken mislukt: {ex.Message}";
+            ErrorMessage = $"Clock in failed: {ex.Message}";
         }
         finally
         {
@@ -326,7 +326,7 @@ public partial class ClockViewModel : ViewModelBase
         }
         catch (Exception ex)
         {
-            ErrorMessage = $"Pauze starten mislukt: {ex.Message}";
+            ErrorMessage = $"Start break failed: {ex.Message}";
         }
         finally
         {
@@ -348,7 +348,7 @@ public partial class ClockViewModel : ViewModelBase
         }
         catch (Exception ex)
         {
-            ErrorMessage = $"Pauze beëindigen mislukt: {ex.Message}";
+            ErrorMessage = $"End break failed: {ex.Message}";
         }
         finally
         {
@@ -375,7 +375,7 @@ public partial class ClockViewModel : ViewModelBase
         }
         catch (Exception ex)
         {
-            ErrorMessage = $"Uitklokken mislukt: {ex.Message}";
+            ErrorMessage = $"Clock out failed: {ex.Message}";
         }
         finally
         {
@@ -483,9 +483,9 @@ public partial class ClockViewModel : ViewModelBase
         else if (status.IsSessionActive && status.CheckedInAt.HasValue)
         {
             var localTime = status.CheckedInAt.Value.ToLocalTime();
-            SessionLabel = $"Ingeklokt sinds {localTime:HH:mm}";
+            SessionLabel = $"Clocked in since {localTime:HH:mm}";
             BreakLabel = status.TotalBreakTime > TimeSpan.Zero
-                ? $"Pauze genomen — {FormatBreakDuration(status.TotalBreakTime)}"
+                ? $"Break taken — {FormatBreakDuration(status.TotalBreakTime)}"
                 : string.Empty;
         }
         else
@@ -506,7 +506,7 @@ public partial class ClockViewModel : ViewModelBase
         else
         {
             var remaining = Math.Ceiling(_configuration.RemainingBreakTime(breakStartedAt).TotalMinutes);
-            BreakLabel = $"nog {remaining} min. verplicht";
+            BreakLabel = $"{remaining} min. remaining required";
         }
     }
 
@@ -532,7 +532,7 @@ public partial class ClockViewModel : ViewModelBase
         }
 
         ElapsedDisplay = FormatElapsed(CalculateElapsed());
-        TimerCaption = IsOnBreak ? "Pauze" : "Aan het werk";
+        TimerCaption = IsOnBreak ? "Break" : "Working";
     }
 
     private void OnElapsedTick()
@@ -608,16 +608,16 @@ public partial class ClockViewModel : ViewModelBase
         switch (result.Status)
         {
             case ClockInStatus.AlreadyCheckedIn:
-                ErrorMessage = result.Message ?? "Je bent al ingeklokt.";
+                ErrorMessage = result.Message ?? "You are already clocked in.";
                 break;
             case ClockInStatus.Failed:
-                ErrorMessage = result.Message ?? "Inklokken is mislukt.";
+                ErrorMessage = result.Message ?? "Clock in failed.";
                 break;
             case ClockInStatus.Recorded or ClockInStatus.SavedOffline or ClockInStatus.Synced:
                 if (IsSessionActive)
                     ErrorMessage = string.Empty;
                 else
-                    ErrorMessage = "Inklokken is opgeslagen, maar de status kon niet worden geladen. Wis lokale data of herstart de app.";
+                    ErrorMessage = "Clock in was saved, but status could not be loaded. Clear local data or restart the app.";
                 break;
         }
     }
@@ -628,13 +628,13 @@ public partial class ClockViewModel : ViewModelBase
         {
             case StartBreakStatus.NotWorking:
             case StartBreakStatus.Failed:
-                ErrorMessage = result.Message ?? "Pauze starten is mislukt.";
+                ErrorMessage = result.Message ?? "Start break failed.";
                 break;
             case StartBreakStatus.Recorded or StartBreakStatus.SavedOffline or StartBreakStatus.Synced:
                 if (IsOnBreak)
                     ErrorMessage = string.Empty;
                 else
-                    ErrorMessage = result.Message ?? "Pauze kon niet worden gestart.";
+                    ErrorMessage = result.Message ?? "Break could not be started.";
                 break;
         }
     }
@@ -646,13 +646,13 @@ public partial class ClockViewModel : ViewModelBase
             case EndBreakStatus.NotOnBreak:
             case EndBreakStatus.MinimumDurationNotMet:
             case EndBreakStatus.Failed:
-                ErrorMessage = result.Message ?? "Pauze beëindigen is mislukt.";
+                ErrorMessage = result.Message ?? "End break failed.";
                 break;
             case EndBreakStatus.Recorded or EndBreakStatus.SavedOffline or EndBreakStatus.Synced:
                 if (IsWorking)
                     ErrorMessage = string.Empty;
                 else
-                    ErrorMessage = result.Message ?? "Pauze kon niet worden beëindigd.";
+                    ErrorMessage = result.Message ?? "Break could not be ended.";
                 break;
         }
     }
@@ -664,13 +664,13 @@ public partial class ClockViewModel : ViewModelBase
             case ClockOutStatus.NotCheckedIn:
             case ClockOutStatus.Failed:
             case ClockOutStatus.PendingSync:
-                ErrorMessage = result.Message ?? "Uitklokken is mislukt.";
+                ErrorMessage = result.Message ?? "Clock out failed.";
                 break;
             case ClockOutStatus.Synced or ClockOutStatus.SavedOffline:
                 if (!IsSessionActive)
                     ErrorMessage = string.Empty;
                 else
-                    ErrorMessage = result.Message ?? "Uitklokken is mislukt.";
+                    ErrorMessage = result.Message ?? "Clock out failed.";
                 break;
         }
     }
@@ -679,12 +679,12 @@ public partial class ClockViewModel : ViewModelBase
     {
         if (status.PendingSyncCount > 0 && !status.IsSessionActive)
         {
-            InfoMessage = $"{status.PendingSyncCount} sessie(s) wachten op synchronisatie.";
+            InfoMessage = $"{status.PendingSyncCount} session(s) waiting to sync.";
 
             return;
         }
 
-        if (InfoMessage.Contains("wachten op synchronisatie", StringComparison.Ordinal))
+        if (InfoMessage.Contains("waiting to sync", StringComparison.Ordinal))
             InfoMessage = string.Empty;
     }
 
@@ -715,7 +715,7 @@ public partial class ClockViewModel : ViewModelBase
         }
         catch (Exception ex)
         {
-            DayHoursErrorMessage = $"Uren laden mislukt: {ex.Message}";
+            DayHoursErrorMessage = $"Loading hours failed: {ex.Message}";
         }
         finally
         {
@@ -726,7 +726,7 @@ public partial class ClockViewModel : ViewModelBase
     private static string FormatBreakDuration(TimeSpan duration)
     {
         if (duration.TotalMinutes < 1)
-            return "minder dan 1 min";
+            return "less than 1 min";
 
         if (duration.TotalHours < 1)
             return $"{(int)duration.TotalMinutes} min";
@@ -735,9 +735,9 @@ public partial class ClockViewModel : ViewModelBase
         var minutes = duration.Minutes;
 
         if (minutes == 0)
-            return $"{hours} uur";
+            return $"{hours} hr";
 
-        return $"{hours} uur {minutes} min";
+        return $"{hours} hr {minutes} min";
     }
 
     private async Task RefreshLocationStatusAsync()
@@ -756,19 +756,19 @@ public partial class ClockViewModel : ViewModelBase
             switch (result.Status)
             {
                 case WorkLocationCheckStatus.AtLocation:
-                    LocationStatusText = "Op locatie";
+                    LocationStatusText = "On site";
                     IsAtLocation = true;
                     break;
                 case WorkLocationCheckStatus.NotAtLocation:
-                    LocationStatusText = "Niet op locatie";
+                    LocationStatusText = "Not on site";
                     IsAtLocation = false;
                     break;
                 case WorkLocationCheckStatus.NoLocationConfigured:
-                    LocationStatusText = "Geen locatie ingesteld";
+                    LocationStatusText = "No location configured";
                     IsAtLocation = false;
                     break;
                 default:
-                    LocationStatusText = "Locatie niet beschikbaar";
+                    LocationStatusText = "Location unavailable";
                     IsAtLocation = false;
                     break;
             }
@@ -827,7 +827,7 @@ public partial class ClockViewModel : ViewModelBase
         }
         catch (Exception ex)
         {
-            ErrorMessage = $"Inklokken mislukt: {ex.Message}";
+            ErrorMessage = $"Clock in failed: {ex.Message}";
         }
         finally
         {
@@ -862,7 +862,7 @@ public partial class ClockViewModel : ViewModelBase
         }
         catch (Exception ex)
         {
-            ErrorMessage = $"Uitklokken mislukt: {ex.Message}";
+            ErrorMessage = $"Clock out failed: {ex.Message}";
         }
         finally
         {

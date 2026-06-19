@@ -58,7 +58,7 @@ public sealed class InMemoryQrCodeRepository : IQrCodeRepository
     public QrValidationResult ValidatePairingCode(int organisationId, string code, string? locationId = null)
     {
         if (organisationId <= 0)
-            return Invalid("Organisatie kon niet worden bepaald. Log opnieuw in.");
+            return Invalid("Organisation could not be determined. Log in again.");
 
         if (!QrPairingCode.TryNormalize(code, out var normalizedCode, out var formatError))
             return Invalid(formatError);
@@ -67,17 +67,17 @@ public sealed class InMemoryQrCodeRepository : IQrCodeRepository
         var windowStart = QrPairingCode.GetWindowStart(utcNow, _windowMinutes);
 
         if (!QrPairingCode.IsActive(utcNow, windowStart, _windowMinutes))
-            return Invalid("Deze koppelcode is verlopen.");
+            return Invalid("This pairing code has expired.");
 
         var expectedLocation = GetLocationId(organisationId);
 
         if (!string.IsNullOrWhiteSpace(locationId) && !string.Equals(locationId.Trim(), expectedLocation, StringComparison.OrdinalIgnoreCase))
-            return Invalid("Deze koppelcode hoort niet bij deze locatie.");
+            return Invalid("This pairing code does not belong to this location.");
 
         var expectedCode = QrPairingCode.Generate(organisationId, windowStart);
 
         if (!string.Equals(normalizedCode, expectedCode, StringComparison.Ordinal))
-            return Invalid("De koppelcode is ongeldig of verlopen.");
+            return Invalid("The pairing code is invalid or expired.");
 
         return new QrValidationResult
         {

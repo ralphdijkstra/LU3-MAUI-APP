@@ -24,12 +24,12 @@
 
                 <Border Style="{StaticResource TimeOnCard}" Padding="24,24">
                     <VerticalStackLayout Spacing="16">
-                        <Label Text="Ingeklokt" Style="{StaticResource TimeOnSectionTitle}" FontSize="18" Margin="0,0,0,0" />
-                        <Label Text="Medewerkers die momenteel ingeklokt zijn." Style="{StaticResource TimeOnSubtitle}" Margin="0,-16,0,0" />
+                        <Label Text="Clocked in" Style="{StaticResource TimeOnSectionTitle}" FontSize="18" Margin="0,0,0,0" />
+                        <Label Text="Employees currently clocked in." Style="{StaticResource TimeOnSubtitle}" Margin="0,-16,0,0" />
 
                         <ActivityIndicator Color="{StaticResource Primary}" IsRunning="{Binding IsLoadingClockedInUsers}" IsVisible="{Binding IsLoadingClockedInUsers}" HorizontalOptions="Center" />
 
-                        <Label Text="Niemand is momenteel ingeklokt." IsVisible="{Binding HasNoClockedInUsers}" Style="{StaticResource TimeOnSubtitle}" HorizontalTextAlignment="Center" />
+                        <Label Text="No one is currently clocked in." IsVisible="{Binding HasNoClockedInUsers}" Style="{StaticResource TimeOnSubtitle}" HorizontalTextAlignment="Center" />
 
                         <CollectionView ItemsSource="{Binding ClockedInUsers}" SelectionMode="None">
                             <CollectionView.ItemTemplate>
@@ -46,14 +46,14 @@
                         <Grid Grid.Column="1" ColumnDefinitions="Auto,*,Auto" VerticalOptions="Center">
                             <Label Grid.Column="0" Text="{Binding DayTitle}" Style="{StaticResource TimeOnSectionTitle}" FontSize="18" Margin="0,0,0,0" VerticalOptions="Center" />
 
-                            <Label Grid.Column="2" Text="{Binding TotalDuration, StringFormat='Totaal: {0}'}" IsVisible="{Binding HasDayTotalDuration}" Style="{StaticResource TimeOnSectionTitle}" FontSize="18" FontAttributes="None" VerticalOptions="Center" />
+                            <Label Grid.Column="2" Text="{Binding TotalDuration, StringFormat='Total: {0}'}" IsVisible="{Binding HasDayTotalDuration}" Style="{StaticResource TimeOnSectionTitle}" FontSize="18" FontAttributes="None" VerticalOptions="Center" />
                         </Grid>
 
                         <Label Text="{Binding HoursErrorMessage}" IsVisible="{Binding HasHoursError}" Style="{StaticResource TimeOnError}" />
 
                         <ActivityIndicator Color="{StaticResource Primary}" IsRunning="{Binding IsLoadingHours}" IsVisible="{Binding IsLoadingHours}" HorizontalOptions="Center" />
 
-                        <Label Text="Geen uren gevonden voor vandaag." IsVisible="{Binding HasNoHours}" Style="{StaticResource TimeOnSubtitle}" HorizontalTextAlignment="Center" />
+                        <Label Text="No hours found for today." IsVisible="{Binding HasNoHours}" Style="{StaticResource TimeOnSubtitle}" HorizontalTextAlignment="Center" />
 
                         <CollectionView ItemsSource="{Binding DayHours}" SelectedItem="{Binding ListSelectedHour}" SelectionMode="Single">
                             <CollectionView.ItemTemplate>
@@ -67,29 +67,29 @@
 
                 <Border Style="{StaticResource TimeOnCard}" Padding="24,28" IsVisible="{Binding IsEditing}">
                     <VerticalStackLayout Spacing="12">
-                        <Label Text="Uur aanpassen" Style="{StaticResource TimeOnSectionTitle}" Margin="0" />
+                        <Label Text="Edit hour" Style="{StaticResource TimeOnSectionTitle}" Margin="0" />
 
-                        <Label Text="Wijzigingen worden gelogd in Time On." Style="{StaticResource TimeOnSubtitle}" />
+                        <Label Text="Changes are logged in Time On." Style="{StaticResource TimeOnSubtitle}" />
 
-                        <Label Text="Starttijd (uu:mm)" Style="{StaticResource TimeOnSubtitle}" />
+                        <Label Text="Start time (hh:mm)" Style="{StaticResource TimeOnSubtitle}" />
                         <Border Style="{StaticResource TimeOnFormField}">
                             <Entry Text="{Binding EditStartTime}" Placeholder="08:30" Style="{StaticResource TimeOnEntry}" BackgroundColor="Transparent" />
                         </Border>
 
-                        <Label Text="Duur (uu:mm)" Style="{StaticResource TimeOnSubtitle}" />
+                        <Label Text="Duration (hh:mm)" Style="{StaticResource TimeOnSubtitle}" />
                         <Border Style="{StaticResource TimeOnFormField}">
                             <Entry Text="{Binding EditDuration}" Placeholder="8:00" Style="{StaticResource TimeOnEntry}" BackgroundColor="Transparent" />
                         </Border>
 
-                        <Label Text="Pauze (uu:mm)" Style="{StaticResource TimeOnSubtitle}" />
+                        <Label Text="Break (hh:mm)" Style="{StaticResource TimeOnSubtitle}" />
                         <Border Style="{StaticResource TimeOnFormField}">
                             <Entry Text="{Binding EditBreak}" Placeholder="0:30" Style="{StaticResource TimeOnEntry}" BackgroundColor="Transparent" />
                         </Border>
 
                         <Label Text="{Binding EditErrorMessage}" IsVisible="{Binding HasEditError}" Style="{StaticResource TimeOnError}" />
 
-                        <Button Text="Opslaan" Command="{Binding SaveEditCommand}" Style="{StaticResource TimeOnPrimaryButton}" HorizontalOptions="Fill" />
-                        <Button Text="Annuleren" Command="{Binding CancelEditCommand}" Style="{StaticResource TimeOnMutedButton}" HorizontalOptions="Fill" />
+                        <Button Text="Save" Command="{Binding SaveEditCommand}" Style="{StaticResource TimeOnPrimaryButton}" HorizontalOptions="Fill" />
+                        <Button Text="Cancel" Command="{Binding CancelEditCommand}" Style="{StaticResource TimeOnMutedButton}" HorizontalOptions="Fill" />
                     </VerticalStackLayout>
                 </Border>
             </VerticalStackLayout>

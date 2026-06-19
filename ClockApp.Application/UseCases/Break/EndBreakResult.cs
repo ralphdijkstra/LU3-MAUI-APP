@@ -31,34 +31,34 @@ public class EndBreakResult
     {
         Status = EndBreakStatus.Synced,
         BreakEndedAt = breakEndedAt,
-        Message = "Pauze beëindigd en gesynchroniseerd."
+        Message = "Break ended and synced."
     };
 
     public static EndBreakResult SavedOffline(DateTime breakEndedAt) => new()
     {
         Status = EndBreakStatus.SavedOffline,
         BreakEndedAt = breakEndedAt,
-        Message = "Offline opgeslagen. Wordt gesynchroniseerd bij uitklokken."
+        Message = "Saved offline. Will sync when you clock out."
     };
 
     public static EndBreakResult PendingSync(DateTime breakEndedAt) => new()
     {
         Status = EndBreakStatus.PendingSync,
         BreakEndedAt = breakEndedAt,
-        Message = "Pauze beëindigd. Synchronisatie volgt zodra de verbinding hersteld is."
+        Message = "Break ended. Sync will follow once the connection is restored."
     };
 
     public static EndBreakResult NotOnBreak() => new()
     {
         Status = EndBreakStatus.NotOnBreak,
-        Message = "Je bent niet op pauze."
+        Message = "You are not on break."
     };
 
     public static EndBreakResult MinimumDurationNotMet(TimeSpan remaining) => new()
     {
         Status = EndBreakStatus.MinimumDurationNotMet,
         RemainingBreakTime = remaining,
-        Message = $"Minimale pauzetijd nog niet bereikt. Nog {Math.Ceiling(remaining.TotalMinutes)} minuut/minuten te gaan."
+        Message = $"Minimum break time not yet reached. {Math.Ceiling(remaining.TotalMinutes)} minute(s) remaining."
     };
 
     public static EndBreakResult Failed(string message) => new()

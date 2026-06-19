@@ -52,7 +52,7 @@ public class ClockInUseCaseTests
         var result = await sut.ExecuteAsync(new ClockInRequest());
 
         Assert.Equal(ClockInStatus.Failed, result.Status);
-        Assert.Contains("niet op locatie", result.Message!, StringComparison.OrdinalIgnoreCase);
+        Assert.Contains("not on site", result.Message!, StringComparison.OrdinalIgnoreCase);
         await timeEntryRepository.DidNotReceive().SaveEntryAsync(Arg.Any<TimeEntry>(), Arg.Any<CancellationToken>());
         await presence.DidNotReceive().RegisterCheckInAsync(Arg.Any<DateTime>(), Arg.Any<string?>(), Arg.Any<CancellationToken>());
     }

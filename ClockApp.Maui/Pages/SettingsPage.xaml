@@ -27,7 +27,7 @@
 
         <ScrollView Grid.Row="1">
             <VerticalStackLayout Padding="20" Spacing="20">
-                <Label Text="Instellingen" Style="{StaticResource TimeOnTitle}" FontSize="22" />
+                <Label Text="Settings" Style="{StaticResource TimeOnTitle}" FontSize="22" />
                 <Border Style="{StaticResource TimeOnCard}" Padding="24,28">
                     <VerticalStackLayout Spacing="12">
 
@@ -37,12 +37,12 @@
                             <Border Stroke="{StaticResource Border}" StrokeThickness="1" StrokeShape="RoundRectangle 12" Padding="16,14">
                                 <VerticalStackLayout Spacing="10">
                                     <VerticalStackLayout Spacing="2">
-                                        <Label Text="Naam" Style="{StaticResource TimeOnSubtitle}" />
+                                        <Label Text="Name" Style="{StaticResource TimeOnSubtitle}" />
                                         <Label Text="{Binding DisplayName}" Style="{StaticResource TimeOnSectionTitle}" FontAttributes="None" Margin="0" />
                                     </VerticalStackLayout>
 
                                     <VerticalStackLayout Spacing="2">
-                                        <Label Text="E-mailadres" Style="{StaticResource TimeOnSubtitle}" />
+                                        <Label Text="Email address" Style="{StaticResource TimeOnSubtitle}" />
                                         <Label Text="{Binding Email}" Style="{StaticResource TimeOnSectionTitle}" FontAttributes="None" Margin="0" />
                                     </VerticalStackLayout>
                                 </VerticalStackLayout>
@@ -50,24 +50,24 @@
 
                             <Border Stroke="{StaticResource Border}" StrokeThickness="1" StrokeShape="RoundRectangle 12" Padding="16,14">
                                 <VerticalStackLayout Spacing="2">
-                                    <Label Text="Organisatie-ID" Style="{StaticResource TimeOnSubtitle}" />
+                                    <Label Text="Organisation ID" Style="{StaticResource TimeOnSubtitle}" />
                                     <Label Text="{Binding OrganisationId}" Style="{StaticResource TimeOnSectionTitle}" FontAttributes="None" Margin="0" />
                                 </VerticalStackLayout>
                             </Border>
                         </VerticalStackLayout>
 
                         <VerticalStackLayout IsVisible="{Binding IsManager}" Spacing="12" Margin="0,16,0,0">
-                            <Label Text="Inklokmethode" Style="{StaticResource TimeOnSectionTitle}" Margin="0" />
+                            <Label Text="Clock-in method" Style="{StaticResource TimeOnSectionTitle}" Margin="0" />
 
-                            <Label Text="Kies hoe medewerkers in de app inklokken." Style="{StaticResource TimeOnSubtitle}" />
+                            <Label Text="Choose how employees clock in in the app." Style="{StaticResource TimeOnSubtitle}" />
 
                             <VerticalStackLayout Spacing="8">
                                 <Border Stroke="{StaticResource Border}" StrokeThickness="1" StrokeShape="RoundRectangle 12" Padding="16,14">
                                     <Grid ColumnDefinitions="Auto,*" ColumnSpacing="4">
                                         <RadioButton Grid.Column="0" GroupName="CheckInMode" IsChecked="{Binding IsSelfModeSelected}" InputTransparent="True" VerticalOptions="Center" />
                                         <VerticalStackLayout Grid.Column="1" Spacing="2" VerticalOptions="Center">
-                                            <Label Text="Zelf inklokken" Style="{StaticResource TimeOnSectionTitle}" FontAttributes="None" Margin="0" />
-                                            <Label Text="Medewerker klokt zelf in via de knop." Style="{StaticResource TimeOnSubtitle}" />
+                                            <Label Text="Self clock-in" Style="{StaticResource TimeOnSectionTitle}" FontAttributes="None" Margin="0" />
+                                            <Label Text="Employee clocks in via the button." Style="{StaticResource TimeOnSubtitle}" />
                                         </VerticalStackLayout>
                                         <Grid.GestureRecognizers>
                                             <TapGestureRecognizer Command="{Binding SelectSelfModeCommand}" />
@@ -80,7 +80,7 @@
                                         <RadioButton Grid.Column="0" GroupName="CheckInMode" IsChecked="{Binding IsQrModeSelected}" InputTransparent="True" VerticalOptions="Center" />
                                         <VerticalStackLayout Grid.Column="1" Spacing="2" VerticalOptions="Center">
                                             <Label Text="QR-code" Style="{StaticResource TimeOnSectionTitle}" FontAttributes="None" Margin="0" />
-                                            <Label Text="Medewerker scant een QR-code of vult een koppelcode in." Style="{StaticResource TimeOnSubtitle}" />
+                                            <Label Text="Employee scans a QR code or enters a pairing code." Style="{StaticResource TimeOnSubtitle}" />
                                         </VerticalStackLayout>
                                         <Grid.GestureRecognizers>
                                             <TapGestureRecognizer Command="{Binding SelectQrModeCommand}" />
@@ -93,7 +93,7 @@
                                         <RadioButton Grid.Column="0" GroupName="CheckInMode" IsChecked="{Binding IsGpsModeSelected}" InputTransparent="True" VerticalOptions="Center" />
                                         <VerticalStackLayout Grid.Column="1" Spacing="2" VerticalOptions="Center">
                                             <Label Text="GPS" Style="{StaticResource TimeOnSectionTitle}" FontAttributes="None" Margin="0" />
-                                            <Label Text="Medewerker klokt in via knop wanneer hij op de gekozen werklocatie is." Style="{StaticResource TimeOnSubtitle}" />
+                                            <Label Text="Employee clocks in via button when at the selected work location." Style="{StaticResource TimeOnSubtitle}" />
                                         </VerticalStackLayout>
                                         <Grid.GestureRecognizers>
                                             <TapGestureRecognizer Command="{Binding SelectGpsModeCommand}" />
@@ -105,9 +105,9 @@
                             <Label Text="{Binding CheckInModeError}" IsVisible="{Binding HasCheckInModeError}" Style="{StaticResource TimeOnError}" />
 
                             <VerticalStackLayout IsVisible="{Binding ShowQrSection}" Spacing="12" Margin="0,8,0,0">
-                                <Label Text="QR-code voor inklokken" Style="{StaticResource TimeOnSectionTitle}" Margin="0" />
+                                <Label Text="QR code for clock-in" Style="{StaticResource TimeOnSectionTitle}" Margin="0" />
 
-                                <Label Text="Laat medewerkers deze QR-code scannen of de koppelcode invoeren." Style="{StaticResource TimeOnSubtitle}" />
+                                <Label Text="Let employees scan this QR code or enter the pairing code." Style="{StaticResource TimeOnSubtitle}" />
 
                                 <Border Stroke="{StaticResource Border}" StrokeThickness="1" StrokeShape="RoundRectangle 12" Padding="16" HorizontalOptions="Center">
                                     <Image Source="{Binding QrCodeImage}" HeightRequest="220" WidthRequest="220" Aspect="AspectFit" />
@@ -119,9 +119,9 @@
                             </VerticalStackLayout>
 
                             <VerticalStackLayout x:Name="GpsLocationSection" IsVisible="{Binding ShowGpsSection}" Spacing="12" Margin="0,8,0,0">
-                                <Label Text="Bedrijfslocatie" Style="{StaticResource TimeOnSectionTitle}" Margin="0" />
+                                <Label Text="Company location" Style="{StaticResource TimeOnSectionTitle}" Margin="0" />
 
-                                <Label Text="Kies de werklocatie waarbinnen medewerkers mogen inklokken." Style="{StaticResource TimeOnSubtitle}" />
+                                <Label Text="Choose the work location within which employees may clock in." Style="{StaticResource TimeOnSubtitle}" />
 
                                 <VerticalStackLayout BindableLayout.ItemsSource="{Binding WorkLocations}" Spacing="8">
                                     <BindableLayout.ItemTemplate>

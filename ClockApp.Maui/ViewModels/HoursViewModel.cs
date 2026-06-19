@@ -156,21 +156,21 @@ public partial class HoursViewModel : ViewModelBase
 
         if (!HourFormatting.TryParseTimeOfDay(EditStartTime, out var fromSeconds))
         {
-            EditErrorMessage = "Voer een geldige starttijd in (uu:mm).";
+            EditErrorMessage = "Enter a valid start time (hh:mm).";
 
             return;
         }
 
         if (!HourFormatting.TryParseDuration(EditDuration, out var seconds))
         {
-            EditErrorMessage = "Voer een geldige duur in (uu:mm).";
+            EditErrorMessage = "Enter a valid duration (hh:mm).";
 
             return;
         }
 
         if (!HourFormatting.TryParseBreakDuration(EditBreak, out var breakSeconds))
         {
-            EditErrorMessage = "Voer een geldige pauze in (uu:mm).";
+            EditErrorMessage = "Enter a valid break duration (hh:mm).";
 
             return;
         }
@@ -191,7 +191,7 @@ public partial class HoursViewModel : ViewModelBase
 
             if (!result.Success)
             {
-                EditErrorMessage = result.ErrorMessage ?? "Opslaan mislukt.";
+                EditErrorMessage = result.ErrorMessage ?? "Save failed.";
 
                 return;
             }
@@ -275,7 +275,7 @@ public partial class HoursViewModel : ViewModelBase
     {
         if (!IsOnline)
         {
-            HoursErrorMessage = "Geen verbinding. Uren kunnen niet worden geladen.";
+            HoursErrorMessage = "No connection. Hours cannot be loaded.";
 
             return;
         }
@@ -294,12 +294,12 @@ public partial class HoursViewModel : ViewModelBase
                 DayHours.Add(new DayHourItemViewModel(hour));
 
             DayHourCount = hours.Count;
-            DayTitle = $"Uren vandaag — {today:dd MMM}";
+            DayTitle = $"Hours today — {today:dd MMM}";
             TotalDuration = hours.Count > 0 ? HourFormatting.FormatDuration(hours.Sum(h => h.Seconds)) : string.Empty;
         }
         catch (Exception ex)
         {
-            HoursErrorMessage = $"Uren laden mislukt: {ex.Message}";
+            HoursErrorMessage = $"Loading hours failed: {ex.Message}";
         }
         finally
         {

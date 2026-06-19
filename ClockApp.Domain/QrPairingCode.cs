@@ -36,7 +36,7 @@ public static class QrPairingCode
 
         if (string.IsNullOrWhiteSpace(code))
         {
-            errorMessage = "Voer een koppelcode in.";
+            errorMessage = "Enter a pairing code.";
 
             return false;
         }
@@ -45,7 +45,7 @@ public static class QrPairingCode
 
         if (normalized.Length != Length || normalized.Any(c => c < 'A' || c > 'Z'))
         {
-            errorMessage = "De koppelcode moet uit 5 letters bestaan.";
+            errorMessage = "The pairing code must consist of 5 letters.";
 
             return false;
         }

@@ -28,27 +28,27 @@ public class ClockInResult
     {
         Status = ClockInStatus.Synced,
         CheckedInAt = checkedInAt,
-        Message = "Ingeklokt en gesynchroniseerd."
+        Message = "Clocked in and synced."
     };
 
     public static ClockInResult SavedOffline(DateTime checkedInAt) => new()
     {
         Status = ClockInStatus.SavedOffline,
         CheckedInAt = checkedInAt,
-        Message = "Offline opgeslagen. Wordt gesynchroniseerd bij uitklokken."
+        Message = "Saved offline. Will sync when you clock out."
     };
 
     public static ClockInResult PendingSync(DateTime checkedInAt) => new()
     {
         Status = ClockInStatus.PendingSync,
         CheckedInAt = checkedInAt,
-        Message = "Ingeklokt. Synchronisatie volgt zodra de verbinding hersteld is."
+        Message = "Clocked in. Sync will follow once the connection is restored."
     };
 
     public static ClockInResult AlreadyCheckedIn() => new()
     {
         Status = ClockInStatus.AlreadyCheckedIn,
-        Message = "Je bent al ingeklokt."
+        Message = "You are already clocked in."
     };
 
     public static ClockInResult Failed(string message) => new()

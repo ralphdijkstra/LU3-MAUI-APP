@@ -39,10 +39,10 @@ public class UpdateHourUseCase
     public async Task<UpdateHourResult> ExecuteAsync(UpdateHourRequest request, CancellationToken cancellationToken = default)
     {
         if (request.HourId <= 0)
-            return UpdateHourResult.Failed("Ongeldige uurregistratie.");
+            return UpdateHourResult.Failed("Invalid hour entry.");
 
         if (request.Seconds <= 0)
-            return UpdateHourResult.Failed("Werkduur moet groter zijn dan nul.");
+            return UpdateHourResult.Failed("Work duration must be greater than zero.");
 
         var hour = new HourRecord
         {
@@ -55,6 +55,6 @@ public class UpdateHourUseCase
 
         var saved = await _hourRepository.SaveAsync(hour, cancellationToken);
 
-        return saved ? UpdateHourResult.Succeeded() : UpdateHourResult.Failed("Opslaan mislukt. Controleer je verbinding en probeer opnieuw.");
+        return saved ? UpdateHourResult.Succeeded() : UpdateHourResult.Failed("Save failed. Check your connection and try again.");
     }
 }

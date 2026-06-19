@@ -24,7 +24,7 @@ public class Timesheet
     public TimeEntry CheckIn(DateTime timestamp, bool isOffline)
     {
         if (IsSessionActive())
-            throw new DomainException("Medewerker is al ingeklokt.");
+            throw new DomainException("Employee is already clocked in.");
 
         var entry = new TimeEntry(timestamp, TimeEntryType.CheckIn, isOffline);
 
@@ -36,7 +36,7 @@ public class Timesheet
     public TimeEntry CheckOut(DateTime timestamp, bool isOffline)
     {
         if (!IsSessionActive())
-            throw new DomainException("Medewerker moet eerst inklokken.");
+            throw new DomainException("Employee must clock in first.");
 
         var entry = new TimeEntry(timestamp, TimeEntryType.CheckOut, isOffline);
 
@@ -48,7 +48,7 @@ public class Timesheet
     public TimeEntry ForceEndBreak(DateTime timestamp, bool isOffline)
     {
         if (!IsOnBreak())
-            throw new DomainException("Je bent niet op pauze.");
+            throw new DomainException("You are not on break.");
 
         var entry = new TimeEntry(timestamp, TimeEntryType.BreakEnd, isOffline);
 
@@ -60,7 +60,7 @@ public class Timesheet
     public TimeEntry StartBreak(DateTime timestamp, bool isOffline)
     {
         if (!IsWorking())
-            throw new DomainException("Je kunt alleen pauze nemen tijdens een actieve werkdag.");
+            throw new DomainException("You can only take a break during an active work session.");
 
         var entry = new TimeEntry(timestamp, TimeEntryType.BreakStart, isOffline);
 
@@ -72,7 +72,7 @@ public class Timesheet
     public TimeEntry EndBreak(DateTime timestamp, bool isOffline, TimeSpan minimumBreakDuration)
     {
         if (!IsOnBreak())
-            throw new DomainException("Je bent niet op pauze.");
+            throw new DomainException("You are not on break.");
 
         var breakStart = GetActiveBreakStart()!;
         var elapsed = timestamp - breakStart.Timestamp;
@@ -82,7 +82,7 @@ public class Timesheet
             var remaining = minimumBreakDuration - elapsed;
             var minutes = (int)Math.Ceiling(remaining.TotalMinutes);
 
-            throw new DomainException($"Minimale pauzetijd van {minimumBreakDuration.TotalMinutes} minuten: nog {minutes} minuut/minuten te gaan.");
+            throw new DomainException($"Minimum break time of {minimumBreakDuration.TotalMinutes} minutes: {minutes} minute(s) remaining.");
         }
 
         var entry = new TimeEntry(timestamp, TimeEntryType.BreakEnd, isOffline);

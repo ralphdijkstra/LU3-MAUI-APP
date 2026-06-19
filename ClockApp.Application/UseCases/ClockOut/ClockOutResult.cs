@@ -21,27 +21,27 @@ public class ClockOutResult
     {
         Status = ClockOutStatus.Synced,
         CheckedOutAt = checkedOutAt,
-        Message = "Uitgeklokt en gesynchroniseerd."
+        Message = "Clocked out and synced."
     };
 
     public static ClockOutResult SavedOffline(DateTime checkedOutAt) => new()
     {
         Status = ClockOutStatus.SavedOffline,
         CheckedOutAt = checkedOutAt,
-        Message = "Offline opgeslagen. Wordt gesynchroniseerd zodra er internet is."
+        Message = "Saved offline. Will sync once internet is available."
     };
 
     public static ClockOutResult PendingSync(DateTime checkedOutAt) => new()
     {
         Status = ClockOutStatus.PendingSync,
         CheckedOutAt = checkedOutAt,
-        Message = "Uitgeklokt. Synchronisatie volgt zodra de verbinding hersteld is."
+        Message = "Clocked out. Sync will follow once the connection is restored."
     };
 
     public static ClockOutResult NotCheckedIn() => new()
     {
         Status = ClockOutStatus.NotCheckedIn,
-        Message = "Je bent niet ingeklokt. Klok eerst in voordat je uitklokt."
+        Message = "You are not clocked in. Clock in before clocking out."
     };
 
     public static ClockOutResult Failed(string message) => new()

@@ -241,7 +241,7 @@ public partial class SettingsViewModel : ViewModelBase
 
             if (organisationId <= 0)
             {
-                CheckInModeError = "Inklokmethode kon niet worden opgeslagen.";
+                CheckInModeError = "Clock-in method could not be saved.";
 
                 return;
             }
@@ -324,7 +324,7 @@ public partial class SettingsViewModel : ViewModelBase
         }
 
         PairingCode = snapshot.Code;
-        QrValidUntilText = $"Geldig tot {snapshot.ValidUntilUtc.ToLocalTime():HH:mm}";
+        QrValidUntilText = $"Valid until {snapshot.ValidUntilUtc.ToLocalTime():HH:mm}";
         QrCodeImage = ImageSource.FromStream(() => new MemoryStream(snapshot.QrImagePng));
         ScheduleQrRefresh(snapshot.ValidUntilUtc);
     }

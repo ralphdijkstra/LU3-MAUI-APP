@@ -37,6 +37,6 @@
 	<key>XSAppIconAssets</key>
 	<string>Assets.xcassets/appicon.appiconset</string>
 	<key>NSLocationWhenInUseUsageDescription</key>
-	<string>ClockApp gebruikt je locatie om te controleren of je op de werklocatie bent voor het in- en uitklokken.</string>
+	<string>ClockApp uses your location to verify you are at the work location for clocking in and out.</string>
 </dict>
 </plist>

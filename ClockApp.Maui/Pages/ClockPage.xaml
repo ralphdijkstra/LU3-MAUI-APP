@@ -31,7 +31,7 @@
                 Padding="20"
                 Spacing="20">
                 
-                <Label Text="Inklokken" Style="{StaticResource TimeOnTitle}" FontSize="22" />
+                <Label Text="Clock in" Style="{StaticResource TimeOnTitle}" FontSize="22" />
 
                 <Border Style="{StaticResource TimeOnCard}" Padding="0">
                     <VerticalStackLayout Spacing="0">
@@ -53,7 +53,7 @@
                                     <Entry
                                         Text="{Binding PairingCode}"
                                         MaxLength="5"
-                                        Placeholder="Koppelcode"
+                                        Placeholder="Pairing code"
                                         HorizontalTextAlignment="Center"
                                         FontSize="24"
                                         CharacterSpacing="8"
@@ -98,7 +98,7 @@
                                 Style="{StaticResource TimeOnInfoMessage}" />
 
                             <VerticalStackLayout IsVisible="{Binding ShowGpsLocationStatus}" Spacing="8" Margin="0,4,0,0">
-                                <Label Text="Locatiestatus" Style="{StaticResource TimeOnSectionTitle}" Margin="0" />
+                                <Label Text="Location status" Style="{StaticResource TimeOnSectionTitle}" Margin="0" />
 
                                 <Border Stroke="{StaticResource Border}" StrokeThickness="1" StrokeShape="RoundRectangle 12" Padding="16,14">
                                     <Grid ColumnDefinitions="*,Auto" ColumnSpacing="12" VerticalOptions="Center">
@@ -114,7 +114,7 @@
 
                             <VerticalStackLayout Spacing="12" Margin="0,8,0,0">
                                 <Button
-                                    Text="Inklokken"
+                                    Text="Clock in"
                                     IsVisible="{Binding ShowClockIn}"
                                     IsEnabled="{Binding CanClockInAtLocation}"
                                     Command="{Binding ClockInCommand}"
@@ -122,14 +122,14 @@
                                     HorizontalOptions="Fill" />
 
                                 <Button
-                                    Text="Pauze starten"
+                                    Text="Start break"
                                     IsVisible="{Binding ShowStartBreak}"
                                     Command="{Binding StartBreakCommand}"
                                     Style="{StaticResource TimeOnPrimaryButton}"
                                     HorizontalOptions="Fill" />
 
                                 <Button
-                                    Text="Pauze beëindigen"
+                                    Text="End break"
                                     IsVisible="{Binding ShowEndBreak}"
                                     IsEnabled="{Binding EndBreakEnabled}"
                                     Command="{Binding EndBreakCommand}"
@@ -142,7 +142,7 @@
                                     Margin="0,4" />
 
                                 <Button
-                                    Text="Uitklokken"
+                                    Text="Clock out"
                                     IsVisible="{Binding ShowClockOut}"
                                     IsEnabled="{Binding CanClockOutAtLocation}"
                                     Command="{Binding ClockOutCommand}"
@@ -165,14 +165,14 @@
                         <Grid Grid.Column="1" ColumnDefinitions="Auto,*,Auto" VerticalOptions="Center">
                             <Label Grid.Column="0" Text="{Binding DayHoursTitle}" Style="{StaticResource TimeOnSectionTitle}" FontSize="18" Margin="0,0,0,0" VerticalOptions="Center" />
 
-                            <Label Grid.Column="2" Text="{Binding DayTotalDuration, StringFormat='Totaal: {0}'}" IsVisible="{Binding HasDayTotalDuration}" Style="{StaticResource TimeOnSectionTitle}" FontSize="18" FontAttributes="None" VerticalOptions="Center" />
+                            <Label Grid.Column="2" Text="{Binding DayTotalDuration, StringFormat='Total: {0}'}" IsVisible="{Binding HasDayTotalDuration}" Style="{StaticResource TimeOnSectionTitle}" FontSize="18" FontAttributes="None" VerticalOptions="Center" />
                         </Grid>
 
                         <ActivityIndicator Color="{StaticResource Primary}" IsRunning="{Binding IsLoadingDayHours}" IsVisible="{Binding IsLoadingDayHours}" HorizontalOptions="Center" />
 
                         <Label Text="{Binding DayHoursErrorMessage}" IsVisible="{Binding HasDayHoursError}" Style="{StaticResource TimeOnError}" FontSize="13" />
 
-                        <Label Text="Nog geen uren vandaag." IsVisible="{Binding HasNoDayHours}" Style="{StaticResource TimeOnSubtitle}" />
+                        <Label Text="No hours yet today." IsVisible="{Binding HasNoDayHours}" Style="{StaticResource TimeOnSubtitle}" />
 
                         <CollectionView ItemsSource="{Binding DayHours}" SelectionMode="None">
                             <CollectionView.ItemTemplate>

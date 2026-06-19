@@ -28,27 +28,27 @@ public class StartBreakResult
     {
         Status = StartBreakStatus.Synced,
         BreakStartedAt = breakStartedAt,
-        Message = "Pauze gestart en gesynchroniseerd."
+        Message = "Break started and synced."
     };
 
     public static StartBreakResult SavedOffline(DateTime breakStartedAt) => new()
     {
         Status = StartBreakStatus.SavedOffline,
         BreakStartedAt = breakStartedAt,
-        Message = "Pauze offline opgeslagen. Wordt gesynchroniseerd bij uitklokken."
+        Message = "Break saved offline. Will sync when you clock out."
     };
 
     public static StartBreakResult PendingSync(DateTime breakStartedAt) => new()
     {
         Status = StartBreakStatus.PendingSync,
         BreakStartedAt = breakStartedAt,
-        Message = "Pauze gestart. Synchronisatie volgt zodra de verbinding hersteld is."
+        Message = "Break started. Sync will follow once the connection is restored."
     };
 
     public static StartBreakResult NotWorking() => new()
     {
         Status = StartBreakStatus.NotWorking,
-        Message = "Je moet ingeklokt zijn om pauze te nemen."
+        Message = "You must be clocked in to take a break."
     };
 
     public static StartBreakResult Failed(string message) => new()

@@ -35,12 +35,12 @@ public class ClockInUseCase
         if (mode == CheckInMode.Qr)
         {
             if (string.IsNullOrWhiteSpace(request.QrCode))
-                return ClockInResult.Failed("Scan een QR-code of vul de koppelcode in.");
+                return ClockInResult.Failed("Scan a QR code or enter the pairing code.");
 
             var validation = _qrCodeRepository.ValidatePairingCode(organisationId, request.QrCode.Trim(), request.LocationId);
 
             if (!validation.IsValid)
-                return ClockInResult.Failed(validation.Message ?? "Ongeldige of verlopen QR-code.");
+                return ClockInResult.Failed(validation.Message ?? "Invalid or expired QR code.");
         }
 
         if (mode == CheckInMode.Gps)
@@ -48,13 +48,13 @@ public class ClockInUseCase
             var locationCheck = await _checkWorkLocation.ExecuteAsync(cancellationToken);
 
             if (locationCheck.Status == WorkLocationCheckStatus.NoLocationConfigured)
-                return ClockInResult.Failed("Geen bedrijfslocatie gekozen. Vraag je manager om een locatie in te stellen.");
+                return ClockInResult.Failed("No company location selected. Ask your manager to set a location.");
 
             if (locationCheck.Status == WorkLocationCheckStatus.LocationUnavailable)
-                return ClockInResult.Failed("Locatie niet beschikbaar. Controleer je GPS-instellingen en geef toestemming.");
+                return ClockInResult.Failed("Location unavailable. Check your GPS settings and grant permission.");
 
             if (locationCheck.Status == WorkLocationCheckStatus.NotAtLocation)
-                return ClockInResult.Failed("Je bent niet op locatie. Ga naar de werklocatie om in te klokken.");
+                return ClockInResult.Failed("You are not on site. Go to the work location to clock in.");
         }
 
         var timesheet = await _timesheetRepository.GetCurrentAsync(cancellationToken) ?? new Timesheet();

@@ -7,8 +7,8 @@ public class ClockedInUserItemViewModel
     public ClockedInUserItemViewModel(ClockedInUser user)
     {
         DisplayName = user.DisplayName;
-        CheckedInSince = $"sinds {user.CheckedInAt.ToLocalTime():HH:mm}";
-        StatusLabel = user.IsOnBreak ? "Pauze" : "Aan het werk";
+        CheckedInSince = $"since {user.CheckedInAt.ToLocalTime():HH:mm}";
+        StatusLabel = user.IsOnBreak ? "Break" : "Working";
         IsOnBreak = user.IsOnBreak;
     }
 

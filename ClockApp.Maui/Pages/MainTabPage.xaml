@@ -12,7 +12,7 @@
                 <Label
                     x:Name="ClockTabLabel"
                     Grid.Column="0"
-                    Text="Inklokken"
+                    Text="Clock in"
                     Style="{StaticResource TimeOnBottomTabSelected}"
                     VerticalOptions="Center">
                     <Label.GestureRecognizers>
@@ -35,7 +35,7 @@
                 <Label
                     x:Name="SettingsTabLabel"
                     Grid.Column="2"
-                    Text="Instellingen"
+                    Text="Settings"
                     IsVisible="False"
                     Style="{StaticResource TimeOnBottomTabUnselected}"
                     VerticalOptions="Center">
