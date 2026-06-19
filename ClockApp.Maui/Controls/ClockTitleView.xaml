@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentView xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="ClockApp.Maui.Controls.ClockTitleView">
+
+    <Grid ColumnDefinitions="*,Auto" Padding="0" HorizontalOptions="Fill" VerticalOptions="Center">
+        <HorizontalStackLayout Grid.Column="0" Spacing="10" HorizontalOptions="Start" VerticalOptions="Center">
+            <Image Source="{Binding LogoSource}" HeightRequest="28" WidthRequest="134" Aspect="AspectFit" VerticalOptions="Center" />
+
+            <Border IsVisible="{Binding IsOnline}" Style="{StaticResource TimeOnConnectivityBadgeOnline}" VerticalOptions="Center">
+                <Label Text="ONLINE" Style="{StaticResource TimeOnConnectivityBadgeTextOnline}" />
+            </Border>
+
+            <Border IsVisible="{Binding IsOffline}" Style="{StaticResource TimeOnConnectivityBadgeOffline}" VerticalOptions="Center">
+                <Label Text="OFFLINE" Style="{StaticResource TimeOnConnectivityBadgeTextOffline}" />
+            </Border>
+        </HorizontalStackLayout>
+
+        <Image Grid.Column="1" Source="{Binding LogoutSource}" HeightRequest="24" WidthRequest="24" Aspect="AspectFit" VerticalOptions="Center" HorizontalOptions="End" Margin="0,0,4,0">
+            <Image.GestureRecognizers>
+                <TapGestureRecognizer Command="{Binding LogoutCommand}" />
+            </Image.GestureRecognizers>
+        </Image>
+    </Grid>
+
+</ContentView>

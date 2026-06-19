@@ -1,0 +1,16 @@
+[
+  {
+    "Name": "API + APP",
+    "Projects": [
+      {
+        "Path": "ClockApp.Api\\ClockApp.Api.csproj",
+        "Action": "Start"
+      },
+      {
+        "Path": "ClockApp.Maui\\ClockApp.Maui.csproj",
+        "Action": "Start",
+        "DebugTarget": "Windows Machine"
+      }
+    ]
+  }
+]

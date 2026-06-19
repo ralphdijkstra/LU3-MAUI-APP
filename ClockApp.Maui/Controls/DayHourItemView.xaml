@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentView xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:vm="clr-namespace:ClockApp.Maui.ViewModels"
+             x:Class="ClockApp.Maui.Controls.DayHourItemView"
+             x:DataType="vm:DayHourItemViewModel">
+
+    <Border Stroke="{StaticResource Border}" StrokeThickness="1" StrokeShape="RoundRectangle 12" Padding="16,14" Margin="0,0,0,8">
+        <Grid ColumnDefinitions="*,Auto" ColumnSpacing="12" VerticalOptions="Center">
+            <Label Grid.Column="0" Text="{Binding UserName}" IsVisible="{Binding HasUserName}" Style="{StaticResource TimeOnSectionTitle}" VerticalOptions="Center" />
+
+            <HorizontalStackLayout Grid.Column="1" Spacing="6" VerticalOptions="Center" HorizontalOptions="End">
+                <Label Text="{Binding StartTime}" Style="{StaticResource TimeOnSubtitle}" VerticalOptions="Center" />
+                <Label Text="–" Style="{StaticResource TimeOnSubtitle}" VerticalOptions="Center" />
+                <Label Text="{Binding EndTime}" Style="{StaticResource TimeOnSubtitle}" VerticalOptions="Center" />
+                <Label Text="{Binding Total}" Style="{StaticResource TimeOnSectionTitle}" VerticalOptions="Center" Padding="0,0,0,4" />
+            </HorizontalStackLayout>
+        </Grid>
+    </Border>
+
+</ContentView>

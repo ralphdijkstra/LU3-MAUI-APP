@@ -1,0 +1,83 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<pages:MvvmContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:pages="clr-namespace:ClockApp.Maui.Pages"
+             xmlns:vm="clr-namespace:ClockApp.Maui.ViewModels"
+             x:Class="ClockApp.Maui.Pages.LoginPage"
+             x:TypeArguments="vm:LoginViewModel"
+             x:DataType="vm:LoginViewModel"
+             Style="{StaticResource TimeOnPage}">
+
+    <ScrollView>
+        <VerticalStackLayout
+            Padding="24"
+            Spacing="0"
+            VerticalOptions="Center">
+
+            <Image
+                Source="{Binding LogoSource}"
+                HeightRequest="36"
+                WidthRequest="172"
+                Aspect="AspectFit"
+                HorizontalOptions="Center"
+                Margin="0,0,0,8" />
+
+            <Label
+                Text="Log in met je account"
+                Style="{StaticResource TimeOnSubtitle}"
+                HorizontalOptions="Center"
+                Margin="0,0,0,32" />
+
+            <Border Style="{StaticResource TimeOnCard}" Padding="20">
+                <VerticalStackLayout Spacing="16">
+
+                    <VerticalStackLayout Spacing="6">
+                        <Label Text="E-mailadres" Style="{StaticResource TimeOnSubtitle}" FontSize="13" />
+                        <Border Style="{StaticResource TimeOnFormField}">
+                            <Entry
+                                Placeholder="naam@bedrijf.nl"
+                                Text="{Binding Username}"
+                                Keyboard="Email"
+                                ReturnType="Next"
+                                Style="{StaticResource TimeOnEntry}"
+                                BackgroundColor="Transparent" />
+                        </Border>
+                    </VerticalStackLayout>
+
+                    <VerticalStackLayout Spacing="6">
+                        <Label Text="Wachtwoord" Style="{StaticResource TimeOnSubtitle}" FontSize="13" />
+                        <Border Style="{StaticResource TimeOnFormField}">
+                            <Entry
+                                Placeholder="Wachtwoord"
+                                Text="{Binding Password}"
+                                IsPassword="True"
+                                ReturnType="Done"
+                                Style="{StaticResource TimeOnEntry}"
+                                BackgroundColor="Transparent" />
+                        </Border>
+                    </VerticalStackLayout>
+
+                    <Label
+                        Text="{Binding ErrorMessage}"
+                        Style="{StaticResource TimeOnError}" />
+
+                    <Button
+                        Text="Inloggen"
+                        Command="{Binding LoginCommand}"
+                        Style="{StaticResource TimeOnPrimaryButton}"
+                        HorizontalOptions="Fill"
+                        Margin="0,8,0,0" />
+
+                    <ActivityIndicator
+                        Color="{StaticResource Primary}"
+                        IsRunning="{Binding IsBusy}"
+                        IsVisible="{Binding IsBusy}"
+                        HorizontalOptions="Center" />
+
+                </VerticalStackLayout>
+            </Border>
+
+        </VerticalStackLayout>
+    </ScrollView>
+
+</pages:MvvmContentPage>

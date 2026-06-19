@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentView xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:vm="clr-namespace:ClockApp.Maui.ViewModels"
+             x:Class="ClockApp.Maui.Controls.ClockedInUserItemView"
+             x:DataType="vm:ClockedInUserItemViewModel">
+
+    <Border Stroke="{StaticResource Border}" StrokeThickness="1" StrokeShape="RoundRectangle 12" Padding="16,14" Margin="0,0,0,8">
+        <Grid ColumnDefinitions="*,Auto" ColumnSpacing="12" VerticalOptions="Center">
+            <VerticalStackLayout Grid.Column="0" Spacing="2" VerticalOptions="Center">
+                <Label Text="{Binding DisplayName}" Style="{StaticResource TimeOnSectionTitle}" Margin="-1,0,0,0" />
+                <Label Text="{Binding CheckedInSince}" Style="{StaticResource TimeOnSubtitle}" />
+            </VerticalStackLayout>
+
+            <Border Grid.Column="1" StrokeThickness="0" StrokeShape="RoundRectangle 8" Padding="10,4" VerticalOptions="Center" BackgroundColor="{StaticResource Surface}">
+                <Label Text="{Binding StatusLabel}" Style="{StaticResource TimeOnSubtitle}" TextColor="{StaticResource Primary}" />
+            </Border>
+        </Grid>
+    </Border>
+
+</ContentView>

@@ -1,0 +1,99 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<pages:MvvmContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:controls="clr-namespace:ClockApp.Maui.Controls"
+             xmlns:pages="clr-namespace:ClockApp.Maui.Pages"
+             xmlns:vm="clr-namespace:ClockApp.Maui.ViewModels"
+             x:Class="ClockApp.Maui.Pages.HoursPage"
+             x:TypeArguments="vm:HoursViewModel"
+             x:DataType="vm:HoursViewModel"
+             Style="{StaticResource TimeOnPage}">
+
+    <Grid RowDefinitions="Auto,*">
+        <VerticalStackLayout Grid.Row="0" Spacing="0">
+            <Border BackgroundColor="{StaticResource Surface}" StrokeThickness="0" HeightRequest="52" Padding="16,0,12,0">
+                <controls:ClockTitleView BindingContext="{Binding}" VerticalOptions="Center" />
+            </Border>
+
+            <BoxView HeightRequest="1" Color="{StaticResource Border}" HorizontalOptions="Fill" />
+        </VerticalStackLayout>
+
+        <ScrollView Grid.Row="1">
+            <VerticalStackLayout Padding="20" Spacing="20">
+                <Label Text="Manager" Style="{StaticResource TimeOnTitle}" FontSize="22" />
+
+                <Border Style="{StaticResource TimeOnCard}" Padding="24,24">
+                    <VerticalStackLayout Spacing="16">
+                        <Label Text="Ingeklokt" Style="{StaticResource TimeOnSectionTitle}" FontSize="18" Margin="0,0,0,0" />
+                        <Label Text="Medewerkers die momenteel ingeklokt zijn." Style="{StaticResource TimeOnSubtitle}" Margin="0,-16,0,0" />
+
+                        <ActivityIndicator Color="{StaticResource Primary}" IsRunning="{Binding IsLoadingClockedInUsers}" IsVisible="{Binding IsLoadingClockedInUsers}" HorizontalOptions="Center" />
+
+                        <Label Text="Niemand is momenteel ingeklokt." IsVisible="{Binding HasNoClockedInUsers}" Style="{StaticResource TimeOnSubtitle}" HorizontalTextAlignment="Center" />
+
+                        <CollectionView ItemsSource="{Binding ClockedInUsers}" SelectionMode="None">
+                            <CollectionView.ItemTemplate>
+                                <DataTemplate x:DataType="vm:ClockedInUserItemViewModel">
+                                    <controls:ClockedInUserItemView BindingContext="{Binding .}" />
+                                </DataTemplate>
+                            </CollectionView.ItemTemplate>
+                        </CollectionView>
+                    </VerticalStackLayout>
+                </Border>
+
+                <Border Style="{StaticResource TimeOnCard}" Padding="24,24">
+                    <VerticalStackLayout Spacing="16">
+                        <Grid Grid.Column="1" ColumnDefinitions="Auto,*,Auto" VerticalOptions="Center">
+                            <Label Grid.Column="0" Text="{Binding DayTitle}" Style="{StaticResource TimeOnSectionTitle}" FontSize="18" Margin="0,0,0,0" VerticalOptions="Center" />
+
+                            <Label Grid.Column="2" Text="{Binding TotalDuration, StringFormat='Totaal: {0}'}" IsVisible="{Binding HasDayTotalDuration}" Style="{StaticResource TimeOnSectionTitle}" FontSize="18" FontAttributes="None" VerticalOptions="Center" />
+                        </Grid>
+
+                        <Label Text="{Binding HoursErrorMessage}" IsVisible="{Binding HasHoursError}" Style="{StaticResource TimeOnError}" />
+
+                        <ActivityIndicator Color="{StaticResource Primary}" IsRunning="{Binding IsLoadingHours}" IsVisible="{Binding IsLoadingHours}" HorizontalOptions="Center" />
+
+                        <Label Text="Geen uren gevonden voor vandaag." IsVisible="{Binding HasNoHours}" Style="{StaticResource TimeOnSubtitle}" HorizontalTextAlignment="Center" />
+
+                        <CollectionView ItemsSource="{Binding DayHours}" SelectedItem="{Binding ListSelectedHour}" SelectionMode="Single">
+                            <CollectionView.ItemTemplate>
+                                <DataTemplate x:DataType="vm:DayHourItemViewModel">
+                                    <controls:DayHourItemView BindingContext="{Binding .}" />
+                                </DataTemplate>
+                            </CollectionView.ItemTemplate>
+                        </CollectionView>
+                    </VerticalStackLayout>
+                </Border>
+
+                <Border Style="{StaticResource TimeOnCard}" Padding="24,28" IsVisible="{Binding IsEditing}">
+                    <VerticalStackLayout Spacing="12">
+                        <Label Text="Uur aanpassen" Style="{StaticResource TimeOnSectionTitle}" Margin="0" />
+
+                        <Label Text="Wijzigingen worden gelogd in Time On." Style="{StaticResource TimeOnSubtitle}" />
+
+                        <Label Text="Starttijd (uu:mm)" Style="{StaticResource TimeOnSubtitle}" />
+                        <Border Style="{StaticResource TimeOnFormField}">
+                            <Entry Text="{Binding EditStartTime}" Placeholder="08:30" Style="{StaticResource TimeOnEntry}" BackgroundColor="Transparent" />
+                        </Border>
+
+                        <Label Text="Duur (uu:mm)" Style="{StaticResource TimeOnSubtitle}" />
+                        <Border Style="{StaticResource TimeOnFormField}">
+                            <Entry Text="{Binding EditDuration}" Placeholder="8:00" Style="{StaticResource TimeOnEntry}" BackgroundColor="Transparent" />
+                        </Border>
+
+                        <Label Text="Pauze (uu:mm)" Style="{StaticResource TimeOnSubtitle}" />
+                        <Border Style="{StaticResource TimeOnFormField}">
+                            <Entry Text="{Binding EditBreak}" Placeholder="0:30" Style="{StaticResource TimeOnEntry}" BackgroundColor="Transparent" />
+                        </Border>
+
+                        <Label Text="{Binding EditErrorMessage}" IsVisible="{Binding HasEditError}" Style="{StaticResource TimeOnError}" />
+
+                        <Button Text="Opslaan" Command="{Binding SaveEditCommand}" Style="{StaticResource TimeOnPrimaryButton}" HorizontalOptions="Fill" />
+                        <Button Text="Annuleren" Command="{Binding CancelEditCommand}" Style="{StaticResource TimeOnMutedButton}" HorizontalOptions="Fill" />
+                    </VerticalStackLayout>
+                </Border>
+            </VerticalStackLayout>
+        </ScrollView>
+    </Grid>
+
+</pages:MvvmContentPage>

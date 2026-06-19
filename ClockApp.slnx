@@ -1,0 +1,8 @@
+<Solution>
+  <Project Path="ClockApp.Domain/ClockApp.Domain.csproj" />
+  <Project Path="ClockApp.Domain.Tests/ClockApp.Domain.Tests.csproj" />
+  <Project Path="ClockApp.Application/ClockApp.Application.csproj" />
+  <Project Path="ClockApp.Application.Tests/ClockApp.Application.Tests.csproj" />
+  <Project Path="ClockApp.Infrastructure/ClockApp.Infrastructure.csproj" />
+  <Project Path="ClockApp.Maui/ClockApp.Maui.csproj" />
+</Solution>
